@@ -12,5 +12,5 @@ How to start:
 4. Starte das Projekt „ToDoListe-configServer“ in Eclipse
 5. Starte das Projekt „ToDoListeService“ in Eclipse
 6. Öffne den Webbrowser:
-	http://localhost:8080
+	http://localhost:8080/ui
 7. Viel Spaß! 
