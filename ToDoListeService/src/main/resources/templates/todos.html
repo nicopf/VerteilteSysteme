@@ -1,0 +1,162 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Todos</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<div class="content">
+
+<h1>Todo List</h1>
+
+
+<form class="add_form" th:action="@{/}" method="POST">
+	<input class="add_input" type="text" name="title" placeholder="Add Todo"/> <input class="add_button" type="submit" value="Submit" />
+</form>
+
+<table class="table">
+    <thead class="thead">
+    <tr>
+        <td style="width: 5%;">Id</td>
+        <td style="width: 15%;">Title</td>
+        <td style="width: 5%;">Complete</td>
+        <td style="width: 10%;"></td>
+        <td style="width: 10%;">Delete</td>
+        <td style="width: 15%;">Category</td>
+        <td style="width: 30%;"></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="todo: ${todos}">
+        <td class="id" th:text="${todo.id}"/>
+        <td class="title" th:text="${todo.title}"/>
+        <td class="completed" th:text="${todo.completed}"/>
+        <td>
+        	<form th:action="@{|/done/${todo.id}|}" method="POST">
+        		<input class="button_grey" type="submit" value="Done"/>
+        	</form>
+        </td>
+        <td>
+        	<form th:action="@{|/delete/${todo.id}|}" method="POST">
+        		<input class="button_grey" type="submit" value="Delete"/>
+        	</form>
+        </td>
+        <td th:text="${todo.category}"/>
+        <td>
+        <form th:action="@{|/category/${todo.id}|}" method="POST" th:unless="${todo.category}" style="margin: 0px;">
+			<input class="category_form" type="text" name="category" placeholder="Add category"/> <input class="button_grey" type="submit" value="Submit" />
+		</form>
+		</td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+<style>
+* {
+	font-family: Helvetica, "Arial";
+	color: #353550;
+}
+
+.content {
+	width: 70%;
+	margin: auto;
+	padding: 0 10px;
+	background: #ffffff;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.11), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+	height: 100%;
+}
+
+h1 {
+	text-align: center;
+	margin-top: 60px;
+	margin-bottom: 50px; 
+	padding-top: 45px; 
+	color: #ffad33;
+}
+
+h3 {
+	font-weight: 100;
+}
+
+.add_form {
+	padding-bottom: 40px;
+	border: 2px solid #dfdfdf;
+	border-radius: 0px; 
+	margin-bottom: 50px;
+}
+
+.add_input {
+	width: 100%;
+	border-bottom: 2px solid #dfdfdf;
+	border-top: none;
+	border-left: none;
+	border-right: none; 
+	margin-bottom: 10px; 
+	height: 50px; 
+	padding-left: 10px;
+}
+
+.add_button {
+	height: 29px;
+	width: 80px;
+	background-color: #ffad33;
+	margin-left: 20px;
+	float: right;
+	margin-right: 20px;
+	border: none;
+	border-radius: 0px;
+	font-weight: bold;
+	color: white;
+}
+
+.table {
+	width: 100%;
+	border: 2px solid #dfdfdf;
+	border-radius: 0px;
+	padding: 0 30px; 
+	border-collapse: collapse;
+}
+
+.thead {
+	height: 50px;
+	background: #ffad33;
+}
+
+.button_grey {
+	height: 38px;
+	width: 80px;
+	background-color: #909090;
+	margin-left: 20px;
+	float: right;
+	margin-right: 20px;
+	border: none;
+	border-radius: 0px;
+	font-weight: bold;
+	color: white;
+}
+
+.category_form {
+	border-top: none; 
+	border-left: none; 
+	border-right: none; 
+	border-bottom: 2px solid #dfdfdf; 
+	height: 22px; 
+	margin-top: 10px;
+}
+
+tr:hover {
+	background-color: #dadada;
+}
+</style>
